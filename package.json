@@ -1,0 +1,19 @@
+{
+  "name": "vapor-admin-commands",
+  "version": "1.0.0",
+  "description": "Vapor plugin which adds several useful admin commands.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Michael Scholtz",
+    "email": "michael.scholtz@outlook.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scholtzm/vapor-admin-commands.git"
+  },
+  "private": true
+}
