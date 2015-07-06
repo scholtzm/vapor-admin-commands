@@ -1,27 +1,15 @@
-var commands = {
-    setOnlineStatus: {
-        regex: /^!set status ([0-7]{1})/,
-        action: function(client, match) {}
-    },
-    setName: {
-        regex: /^!set name (.{1,32})/,
-        action: function(client, match) {
-            client.setPersonaName(match[1]);
-        }
-    }
-};
+var commands = require('./commands');
 
-function processMessage(client, user, message) {
+function processMessage(VaporAPI, user, message) {
     for(var command in commands) {
         if(commands[command].regex.test(message)) {
             var match = commands[command].regex.exec(message);
-            commands[command].action(client, match);
+            commands[command].action(VaporAPI, user, match);
         }
     }
 }
 
 module.exports = function(VaporAPI) {
-    var client = VaporAPI.getClient();
     var utils = VaporAPI.getUtils();
     var Steam = VaporAPI.getSteam();
 
@@ -31,7 +19,7 @@ module.exports = function(VaporAPI) {
         },
         function(user, message, type) {
             if(type === Steam.EChatEntryType.ChatMsg && utils.isAdmin(user)) {
-                processMessage(client, user, message);
+                processMessage(VaporAPI, user, message);
             }
         }
     );
