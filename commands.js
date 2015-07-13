@@ -4,8 +4,8 @@ module.exports = {
      * Command: !set state <stateName>
      */
     setState: {
-        // LookingToTrade is the longest state name so 14 characters should be sufficient
-        regex: /^!set state ([a-zA-Z]{1,14})/,
+        // "Looking To Trade" is the longest state name so 16 characters should be sufficient
+        regex: /^!set state ([a-zA-Z ]{1,16})/,
         action: function(VaporAPI, user, match) {
             var utils = VaporAPI.getUtils();
             var Steam = VaporAPI.getSteam();
