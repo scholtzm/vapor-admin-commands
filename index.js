@@ -1,4 +1,4 @@
-var commands = require('./commands');
+var commands = require('./commands.js');
 
 function processMessage(VaporAPI, user, message) {
     for(var command in commands) {
@@ -14,7 +14,7 @@ module.exports = function(VaporAPI) {
     var Steam = VaporAPI.getSteam();
 
     VaporAPI.registerHandler({
-            emitter: 'steam',
+            emitter: 'steamFriends',
             event: 'friendMsg'
         },
         function(user, message, type) {
