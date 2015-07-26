@@ -5,7 +5,7 @@
 ### Features
 
 - Adds commands to quickly change bot's name or online state
-- All changes done using commands are only temporary (until you restart your bot)
+- All changes are persisted back to config file
 
 ### Installation
 
@@ -25,6 +25,8 @@ Command | Description | Example
 ------- | ----------- | -------
 !set name {displayName} | Changes bot's display name. Limit for the name is 32 characters. | !set name Banana Bot
 !set state {stateName} | Changes bot's online state. | !set state trade
+!shutdown | Disconnects from Steam network and shuts down Vapor. | *
+!help | Lists all available admin commands | *
 
 The list of commands is currently fairly short. More will be added if necessary.
 
