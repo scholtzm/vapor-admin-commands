@@ -25,7 +25,7 @@ module.exports = {
                 config.state = description;
                 VaporAPI.saveConfig(config);
 
-                log.info('Online state has been changed to: ' + description);
+                log.info('Online state has been changed to: %s', description);
             } else {
                 steamFriends.sendMessage(user, 'Incorrect state name: ' + match[1]);
             }
@@ -49,7 +49,7 @@ module.exports = {
             config.displayName = match[1];
             VaporAPI.saveConfig(config);
 
-            log.info('Display name has been changed to: ' + match[1]);
+            log.info('Display name has been changed to: %s', match[1]);
         }
     },
 
