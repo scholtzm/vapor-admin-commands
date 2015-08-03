@@ -9,7 +9,9 @@ function processMessage(VaporAPI, user, message) {
     }
 }
 
-module.exports = function(VaporAPI) {
+exports.name = 'vapor-admin-commands';
+
+exports.plugin = function(VaporAPI) {
     var utils = VaporAPI.getUtils();
     var Steam = VaporAPI.getSteam();
 

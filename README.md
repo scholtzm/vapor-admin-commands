@@ -9,14 +9,18 @@
 
 ### Installation
 
-1. Go to your Vapor folder.
-2. Run `npm install git+https://github.com/scholtzm/vapor-admin-commands.git`.
-3. Open your config file and update `plugins` to include this plugin. It should look something like this...
+```sh
+npm install vapor-admin-commands
+```
 
-```json
-"plugins": {
-  "vapor-admin-commands": {}
-}
+### Usage
+
+```js
+var adminCommands = require('vapor-admin-commands');
+
+// Instantiate Vapor etc.
+
+vapor.use(adminCommands);
 ```
 
 ### Commands
