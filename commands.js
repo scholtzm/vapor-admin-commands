@@ -63,17 +63,17 @@ module.exports = {
     },
 
     /**
-     * Command: !shutdown
+     * Command: !disconnect
      */
     shutdown: {
-        description: '!shutdown | Disconnects from Steam network and shuts down Vapor.',
-        regex: /^!shutdown$/,
+        description: '!disconnect | Disconnects from Steam network.',
+        regex: /^!disconnect$/,
         action: function(VaporAPI) {
             var log = VaporAPI.getLogger();
 
-            log.info('Shutting down Vapor.');
+            log.info('Disconnecting from Steam network.');
 
-            VaporAPI.shutdown();
+            VaporAPI.diconnect();
         }
     },
 
