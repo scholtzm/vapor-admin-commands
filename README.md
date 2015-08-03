@@ -1,3 +1,5 @@
+[![NPM version](http://img.shields.io/npm/v/vapor-admin-commands.svg?style=flat)](https://www.npmjs.org/package/vapor-admin-commands)
+
 # Vapor Admin Commands Plugin
 
 [Vapor](https://github.com/scholtzm/vapor) plugin which adds several useful admin commands.
