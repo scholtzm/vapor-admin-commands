@@ -5,7 +5,7 @@
 ### Features
 
 - Adds commands to quickly change bot's name or online state
-- All changes are persisted back to config file
+- All changes are optionally persisted back to config file in JSON format
 
 ### Installation
 
@@ -21,7 +21,15 @@ var adminCommands = require('vapor-admin-commands');
 // Instantiate Vapor etc.
 
 vapor.use(adminCommands);
+// or
+vapor.use(adminCommands, {config: {configPath: './myConfig.json'}});
 ```
+
+### Configuration
+
+#### `configPath` (optional)
+
+Path to your configuration file.
 
 ### Commands
 

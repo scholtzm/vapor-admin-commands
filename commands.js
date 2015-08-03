@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = {
 
     /**
@@ -14,6 +16,8 @@ module.exports = {
             var utils = VaporAPI.getUtils();
             var log = VaporAPI.getLogger();
 
+            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
+
             var state = utils.stringToEnum(match[1], Steam.EPersonaState);
 
             if(state !== null) {
@@ -22,8 +26,10 @@ module.exports = {
 
                 steamFriends.setPersonaState(state);
 
-                config.state = description;
-                VaporAPI.saveConfig(config);
+                if(pluginConfig.configPath) {
+                    config.state = description;
+                    fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
+                }
 
                 log.info('Online state has been changed to: %s', description);
             } else {
@@ -43,11 +49,14 @@ module.exports = {
             var steamFriends = VaporAPI.getHandler('steamFriends');
             var log = VaporAPI.getLogger();
             var config = VaporAPI.getConfig();
+            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
 
             steamFriends.setPersonaName(match[1]);
 
-            config.displayName = match[1];
-            VaporAPI.saveConfig(config);
+            if(pluginConfig.configPath) {
+                config.displayName = match[1];
+                fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
+            }
 
             log.info('Display name has been changed to: %s', match[1]);
         }
