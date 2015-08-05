@@ -12,7 +12,7 @@
 ### Installation
 
 ```sh
-npm install vapor-admin-commands
+npm install vapor-admin-commands --save
 ```
 
 ### Usage
