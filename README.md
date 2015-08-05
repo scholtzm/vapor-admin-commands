@@ -33,6 +33,8 @@ vapor.use(adminCommands, {config: {configPath: './myConfig.json'}});
 
 Path to your configuration file.
 
+If set, this plugin will take Vapor's config and persist the changes (name or state) into this file in a JSON format. This option should be only enabled if the given path matches the config file used to initialize your Vapor instance.
+
 ### Commands
 
 Command | Description | Example

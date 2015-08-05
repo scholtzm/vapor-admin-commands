@@ -3,10 +3,34 @@ var fs = require('fs');
 module.exports = {
 
     /**
+     * Command: !set name <displayName>
+     */
+    setName: {
+        description: '!set name {displayName} | Changes bot\'s display name. Limit for the name is 32 characters.',
+        // Maximum name length is 32 characters
+        regex: /^!set name (.{1,32})/,
+        action: function(VaporAPI, user, match) {
+            var steamFriends = VaporAPI.getHandler('steamFriends');
+            var log = VaporAPI.getLogger();
+            var config = VaporAPI.getConfig();
+            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
+
+            steamFriends.setPersonaName(match[1]);
+            config.displayName = match[1];
+
+            if(pluginConfig.configPath) {
+                fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
+            }
+
+            log.info('Display name has been changed to: %s', match[1]);
+        }
+    },
+
+    /**
      * Command: !set state <stateName>
      */
     setState: {
-        description: '!set name {displayName} | Changes bot\'s display name. Limit for the name is 32 characters.',
+        description: '!set state {stateName} | Changes bot\'s online state.',
         // "Looking To Trade" is the longest state name so 16 characters should be sufficient
         regex: /^!set state ([a-zA-Z ]{1,16})/,
         action: function(VaporAPI, user, match) {
@@ -25,9 +49,9 @@ module.exports = {
                 var config = VaporAPI.getConfig();
 
                 steamFriends.setPersonaState(state);
+                config.state = description;
 
                 if(pluginConfig.configPath) {
-                    config.state = description;
                     fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
                 }
 
@@ -35,30 +59,6 @@ module.exports = {
             } else {
                 steamFriends.sendMessage(user, 'Incorrect state name: ' + match[1]);
             }
-        }
-    },
-
-    /**
-     * Command: !set name <displayName>
-     */
-    setName: {
-        description: '!set state {stateName} | Changes bot\'s online state.',
-        // Maximum name length is 32 characters
-        regex: /^!set name (.{1,32})/,
-        action: function(VaporAPI, user, match) {
-            var steamFriends = VaporAPI.getHandler('steamFriends');
-            var log = VaporAPI.getLogger();
-            var config = VaporAPI.getConfig();
-            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
-
-            steamFriends.setPersonaName(match[1]);
-
-            if(pluginConfig.configPath) {
-                config.displayName = match[1];
-                fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
-            }
-
-            log.info('Display name has been changed to: %s', match[1]);
         }
     },
 
