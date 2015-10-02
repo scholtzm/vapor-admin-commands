@@ -11,9 +11,8 @@ module.exports = {
         regex: /^!set name (.{1,32})/,
         action: function(VaporAPI, user, match) {
             var steamFriends = VaporAPI.getHandler('steamFriends');
-            var log = VaporAPI.getLogger();
             var config = VaporAPI.getConfig();
-            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
+            var pluginConfig = VaporAPI.data || {};
 
             steamFriends.setPersonaName(match[1]);
             config.displayName = match[1];
@@ -22,7 +21,7 @@ module.exports = {
                 fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
             }
 
-            log.info('Display name has been changed to: %s', match[1]);
+            VaporAPI.emitEvent('message:info', 'Display name has been changed to: ' + match[1]);
         }
     },
 
@@ -36,11 +35,9 @@ module.exports = {
         action: function(VaporAPI, user, match) {
             var Steam = VaporAPI.getSteam();
             var steamFriends = VaporAPI.getHandler('steamFriends');
-
             var utils = VaporAPI.getUtils();
-            var log = VaporAPI.getLogger();
 
-            var pluginConfig = (VaporAPI.data && VaporAPI.data.config) ? VaporAPI.data.config : {};
+            var pluginConfig = VaporAPI.data || {};
 
             var state = utils.stringToEnum(match[1], Steam.EPersonaState);
 
@@ -55,7 +52,7 @@ module.exports = {
                     fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
                 }
 
-                log.info('Online state has been changed to: %s', description);
+                VaporAPI.emitEvent('message:info', 'Online state has been changed to: ' + description);
             } else {
                 steamFriends.sendMessage(user, 'Incorrect state name: ' + match[1]);
             }
@@ -65,15 +62,12 @@ module.exports = {
     /**
      * Command: !disconnect
      */
-    shutdown: {
+    disconnect: {
         description: '!disconnect | Disconnects from Steam network.',
         regex: /^!disconnect$/,
         action: function(VaporAPI) {
-            var log = VaporAPI.getLogger();
-
-            log.info('Disconnecting from Steam network.');
-
-            VaporAPI.diconnect();
+            VaporAPI.emitEvent('message:info', 'Disconnecting from Steam network.');
+            VaporAPI.disconnect();
         }
     },
 

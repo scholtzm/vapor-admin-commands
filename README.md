@@ -12,7 +12,7 @@
 ### Installation
 
 ```sh
-npm install vapor-admin-commands --save
+npm install vapor-admin-commands
 ```
 
 ### Usage
@@ -24,7 +24,7 @@ var adminCommands = require('vapor-admin-commands');
 
 vapor.use(adminCommands);
 // or
-vapor.use(adminCommands, {config: {configPath: './myConfig.json'}});
+vapor.use(adminCommands, {configPath: './myConfig.json'});
 ```
 
 ### Configuration
@@ -35,14 +35,22 @@ Path to your configuration file.
 
 If set, this plugin will take Vapor's config and persist the changes (name or state) into this file in a JSON format. This option should be only enabled if the given path matches the config file used to initialize your Vapor instance.
 
+### Events
+
+#### `message:*`
+
+* `message` - A message string.
+
+Standard [message events](https://github.com/scholtzm/vapor/blob/master/docs/EVENTS.md#message) to be used with logger.
+
 ### Commands
 
 Command | Description | Example
 ------- | ----------- | -------
-!set name {displayName} | Changes bot's display name. Limit for the name is 32 characters. | !set name Banana Bot
-!set state {stateName} | Changes bot's online state. | !set state trade
-!disconnect | Disconnects from Steam network. | *
-!help | Lists all available admin commands | *
+`!set name {displayName}` | Changes bot's display name. Limit for the name is 32 characters. | !set name Banana Bot
+`!set state {stateName}` | Changes bot's online state. | !set state trade
+`!disconnect` | Disconnects from Steam network. | *
+`!help` | Lists all available admin commands | *
 
 The list of commands is currently fairly short. More will be added if necessary.
 
