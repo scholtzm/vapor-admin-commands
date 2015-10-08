@@ -10,6 +10,7 @@ module.exports = {
         // Maximum name length is 32 characters
         regex: /^!set name (.{1,32})/,
         action: function(VaporAPI, user, match) {
+            var log = VaporAPI.getLogger();
             var steamFriends = VaporAPI.getHandler('steamFriends');
             var config = VaporAPI.getConfig();
             var pluginConfig = VaporAPI.data || {};
@@ -21,7 +22,7 @@ module.exports = {
                 fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
             }
 
-            VaporAPI.emitEvent('message:info', 'Display name has been changed to: ' + match[1]);
+            log.info('Display name has been changed to: %s', match[1]);
         }
     },
 
@@ -33,6 +34,7 @@ module.exports = {
         // "Looking To Trade" is the longest state name so 16 characters should be sufficient
         regex: /^!set state ([a-zA-Z ]{1,16})/,
         action: function(VaporAPI, user, match) {
+            var log = VaporAPI.getLogger();
             var Steam = VaporAPI.getSteam();
             var steamFriends = VaporAPI.getHandler('steamFriends');
             var utils = VaporAPI.getUtils();
@@ -52,7 +54,7 @@ module.exports = {
                     fs.writeFileSync(pluginConfig.configPath, JSON.stringify(config, null, 2));
                 }
 
-                VaporAPI.emitEvent('message:info', 'Online state has been changed to: ' + description);
+                log.info('Online state has been changed to: %s', description);
             } else {
                 steamFriends.sendMessage(user, 'Incorrect state name: ' + match[1]);
             }
@@ -66,7 +68,7 @@ module.exports = {
         description: '!disconnect | Disconnects from Steam network.',
         regex: /^!disconnect$/,
         action: function(VaporAPI) {
-            VaporAPI.emitEvent('message:info', 'Disconnecting from Steam network.');
+            VaporAPI.getLogger().info('Disconnecting from Steam network.');
             VaporAPI.disconnect();
         }
     },
