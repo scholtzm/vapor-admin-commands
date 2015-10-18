@@ -1,6 +1,6 @@
 {
   "name": "vapor-admin-commands",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Vapor plugin which adds several useful admin commands.",
   "main": "index.js",
   "scripts": {
