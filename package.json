@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/scholtzm/vapor-admin-commands.git"
+  },
+  "peerDependencies": {
+    "vapor": "1.x"
   }
 }
